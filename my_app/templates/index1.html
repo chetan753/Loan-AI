@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+    <body>
+        <head>
+            <title>Guessing Game</title>
+            <link rel="stylesheet" href="{{ url_for('static',filename='style.css')}}">
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+        </head>
+        <div class="nav-out">
+            <div class="navbtn-page">
+                <a href="/">Home</a>
+            </div>
+            <div style="margin-left: 200px" class="navbtn1">
+                <a href="/loan">Loan Apporval</a>
+            </div>
+        </div>
+        <div class="outer-box">
+            <form method="POST">
+                <h2>Guess the number</h2>
+                <input class="input-box1" type="number" placeholder="Enter number" name="userguess">
+                <div class="btn-div">
+                    <button class="btn2" type="submit">Guess</button>
+                    <button class="reset" name="reset" value="1">Reset</button>
+                </div>
+                
+                <p class="result-box2"> {{ result2 }}</p>
+            </form>
+
+        </div>
+        
+
+
+    </body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LoanAI — Predict</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <div class="topbar">
+        <div class="tb-logo">
+            <div class="tb-icon">🏦</div>
+            <span class="tb-name">LoanAI</span>
+            <span class="tb-badge">LIVE</span>
+        </div>
+        <div class="tb-div"></div>
+        <div class="tb-links">
+            <a href="/"        class="tb-link">Home</a>
+            <a href="/predict" class="tb-link on">Predict</a>
+            <a href="/history" class="tb-link">History</a>
+            <a href="/stats"   class="tb-link">Stats</a>
+        </div>
+        <div class="tb-right">
+            <div class="tb-status"><div class="tb-dot"></div>model online</div>
+            <a href="/predict" class="tb-btn">Try Now →</a>
+            <div class="tb-avatar">C</div>
+        </div>
+    </div>
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+        <div class="page-tag">
+            <div class="page-tag-dot"></div>
+            LOAN PREDICTION ENGINE
+        </div>
+        <h1>Check Your Eligibility</h1>
+        <p>Fill in your details below and get an instant ML-powered decision</p>
+    </div>
+
+    <!-- LAYOUT -->
+    <div class="predict-layout">
+
+        <!-- FORM -->
+        <div class="form-card">
+            <h2><span>📋</span> Your Details</h2>
+            <form method="POST" action="/predict">
+                <div class="field-grid">
+                    <div class="field">
+                        <label>Credit Score</label>
+                        <input type="number" name="credit_score" placeholder="e.g. 720" required>
+                    </div>
+                    <div class="field">
+                        <label>Annual Income (₹)</label>
+                        <input type="number" name="income" placeholder="e.g. 600000" required>
+                    </div>
+                    <div class="field">
+                        <label>Loan Amount (₹)</label>
+                        <input type="number" name="loan_amount" placeholder="e.g. 200000" required>
+                    </div>
+                    <div class="field">
+                        <label>Employment Years</label>
+                        <input type="number" name="emp_years" placeholder="e.g. 3" required>
+                    </div>
+                    <div class="field full">
+                        <label>Age</label>
+                        <input style="width: 90%;" type="number" name="age" placeholder="e.g. 28" required>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">⚡ Predict Now</button>
+            </form>
+        </div>
+
+        <!-- RESULTS -->
+        {% if result1 %}
+        <div class="result-panel">
+
+            <!-- DECISION CARD -->
+            <div class="result-card {% if result == 'Approved' %}approved{% else %}rejected{% endif %}">
+                <div class="result-icon">
+                    {% if result1 == 'Approved' %}✅{% else %}❌{% endif %}
+                </div>
+                <div class="result-title">{{ result1 | upper }}</div>
+                <div class="result-prob">Probability: <span>{{ probability }}%</span></div>
+                <div class="risk-badge risk-{{ risk_level | lower }}">
+                    <div class="risk-dot"></div>
+                    {{ risk_level | upper }} RISK
+                </div>
+            </div>
+
+            <!-- MINI STATS -->
+            <div class="mini-cards">
+                <div class="mini-card">
+                    <div class="mini-val">{{ probability }}%</div>
+                    <div class="mini-lbl">APPROVAL PROB</div>
+                </div>
+                <div class="mini-card">
+                    <div class="mini-val">{{ credit_score }}</div>
+                    <div class="mini-lbl">CREDIT SCORE</div>
+                </div>
+                <div class="mini-card">
+                    <div class="mini-val">₹{{ income }}</div>
+                    <div class="mini-lbl">INCOME</div>
+                </div>
+                <div class="mini-card">
+                    <div class="mini-val">{{ emp_years }} yrs</div>
+                    <div class="mini-lbl">EMPLOYMENT</div>
+                </div>
+            </div>
+
+            <!-- TIPS -->
+            <div class="tips-card">
+                <h4>💡 Tips for Approval</h4>
+                <div class="tip"><span class="tip-dot">→</span> Credit score above 700 strongly helps</div>
+                <div class="tip"><span class="tip-dot">→</span> Income should be 3x loan amount</div>
+                <div class="tip"><span class="tip-dot">→</span> More employment years = lower risk</div>
+            </div>
+
+        </div>
+        {% else %}
+
+        <!-- PLACEHOLDER WHEN NO RESULT YET -->
+        <div class="result-panel">
+            <div class="result-placeholder">
+                <div class="placeholder-icon">🤖</div>
+                <p>Your result will appear here after you submit the form</p>
+            </div>
+            <div class="tips-card">
+                <h4>💡 Tips for Approval</h4>
+                <div class="tip"><span class="tip-dot">→</span> Credit score above 700 strongly helps</div>
+                <div class="tip"><span class="tip-dot">→</span> Income should be 3x loan amount</div>
+                <div class="tip"><span class="tip-dot">→</span> More employment years = lower risk</div>
+            </div>
+        </div>
+
+        {% endif %}
+    </div>
+
+</body>
+</html>

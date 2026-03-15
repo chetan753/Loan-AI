@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <head>
+            <title>Calculator</title>
+            <link rel="stylesheet" href="{{ url_for('static',filename='style.css')}}">
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+        </head>
+        <div class="nav-out">
+            <div class="navbtn-page">
+                <a href="/">Home</a>
+            </div>
+            <div class="navbtn">
+                <a href="/home1">Guessing Game</a>
+            </div>
+            <div class="navbtn1">
+                <a href="/loan">Loan Apporval</a>
+            </div>
+            
+        </div>
+        <form method="POST">
+            <div class="cal_box">
+                <h2 style="font-size:xx-large; font-family: 'Times New Roman', Times, serif;">Calculator</h2>
+                <input name="num1" class="input-box4" type="number" placeholder="Enter first number">
+                <input name="num2" class="input-box41" type="number" placeholder="Enter seceond number">
+                <select name="action" class="select_option">
+                    <option value="add">Add</option>
+                    <option value="sub">Subtract</option>
+                    <option value="div">Divide</option>
+                    <option value="multiply">Multiply</option>
+                </select>
+                <button type="submit" class="btn4">Calculate</button>
+                <h2>{{ result4 }}</h2>
+                <h2>History</h2>
+                <table class="table" >
+                    <tr style="border: none; margin-left: 10px;">
+                        <th>ID</th>
+                        <th>Num1</th>
+                        <th>Num2</th>
+                        <th>Operation</th>
+                        <th>Result</th>
+                    </tr>
+
+                    {% for row in history %}
+                    <tr style="border:none">
+                        <td>{{ row[0] }}</td>
+                        <td>{{ row[1] }}</td>
+                        <td>{{ row[2] }}</td>
+                        <td>{{ row[3] }}</td>
+                        <td>{{ row[4] }}</td>
+                        <td>
+                            <a style="outline: none;" href="/delete/{{ row[0] }}">
+                                <button class="delete" type="button">Delete</button>
+                            </a>
+                        </td>
+                    </tr>
+                    
+                    {% endfor %}
+                    <a href="/clear"><button type="button">Clear History</button></a>
+                </table>
+                
+            </div>
+        </form>
+        
+
+    </body>
+</html>

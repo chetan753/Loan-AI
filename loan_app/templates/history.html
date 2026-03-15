@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LoanAI — History</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <div class="topbar">
+        <div class="tb-logo">
+            <div class="tb-icon">🏦</div>
+            <span class="tb-name">LoanAI</span>
+            <span class="tb-badge">LIVE</span>
+        </div>
+        <div class="tb-div"></div>
+        <div class="tb-links">
+            <a href="/"        class="tb-link">Home</a>
+            <a href="/predict" class="tb-link">Predict</a>
+            <a href="/history" class="tb-link on">History</a>
+            <a href="/stats"   class="tb-link">Stats</a>
+        </div>
+        <div class="tb-right">
+            <div class="tb-status"><div class="tb-dot"></div>model online</div>
+            <a href="/predict" class="tb-btn">Try Now →</a>
+            <div class="tb-avatar">C</div>
+        </div>
+    </div>
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+        <div class="page-tag">
+            <div class="page-tag-dot"></div>
+            PREDICTION HISTORY
+        </div>
+        <h1>Past Predictions</h1>
+        <p>All your loan predictions stored in SQLite</p>
+    </div>
+
+    <!-- TOP BAR -->
+    <div class="history-topbar">
+        <div class="history-count">
+            Showing <span>{{ history | length }}</span> history
+        </div>
+        <form method="POST" action="/clear">
+            <button type="submit" class="clear-btn">🗑 Clear All</button>
+        </form>
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-card">
+        {% if history %}
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Credit Score</th>
+                    <th>Income</th>
+                    <th>Loan Amount</th>
+                    <th>Emp. Years</th>
+                    <th>Result</th>
+                    <th>Probability</th>
+                    <th>Risk</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for p in history %}
+                <tr>
+                    <td class="td-id">{{ "%03d" % p.id }}</td>
+                    <td>{{ p.credit_score }}</td>
+                    <td>₹{{ "{:,}".format(p.income | int) }}</td>
+                    <td>₹{{ "{:,}".format(p.loan_amount | int) }}</td>
+                    <td>{{ p.emp_years }}</td>
+                    <td>
+                        {% if p.result == 'Approved' %}
+                            <span class="badge-approved">✅ Approved</span>
+                        {% else %}
+                            <span class="badge-rejected">❌ Rejected</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ p.prob }}%</td>
+                    <td>
+                        {% if p.risk_level == 'Low' %}
+                            <span class="risk-low-text">🟢 Low</span>
+                        {% elif p.risk_level == 'Medium' %}
+                            <span class="risk-med-text">🟡 Medium</span>
+                        {% else %}
+                            <span class="risk-high-text">🔴 High</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <form method="POST" action="/delete/{{ p.id }}">
+                            <button type="submit" class="delete-btn">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% else %}
+        <!-- EMPTY STATE -->
+        <div class="empty-state">
+            <div class="empty-icon">🤖</div>
+            <p>No predictions yet.<br>Go make your first prediction!</p>
+            <a href="/predict" class="btn-primary">Try it Now →</a>
+        </div>
+        {% endif %}
+
+    </div>
+
+</body>
+</html>

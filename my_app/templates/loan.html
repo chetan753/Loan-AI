@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <head>
+            <title>Loan Apporval</title>
+            <link rel="stylesheet" href="{{ url_for('static',filename='style.css')}}">
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+        </head>
+        <div class="nav-out">
+            <div class="navbtn-page">
+                <a href="/">Home</a>
+            </div>
+            <div style="margin-left:200px;" class="navbtn">
+
+                <a  href="/home1">Guessing Game</a>
+            </div>
+        </div>
+        <div class="card3">
+            <form method="POST">
+                <h2>Loan Approval</h2>
+                <input class="input-box3"  type="number" name="cerdit" placeholder="Enter cerdit score">
+                <input class="input-box3" type="number" name="income" placeholder="Enter income">
+                <input class="input-box3" type="number" name="loanamount" placeholder="Enter loan amount">
+                <button class="btn3" type="submit" name="action" value="check">Check</button>
+            </form>
+        </div>
+        <p class="result-box3"  style="color: black;">{{ result3 }}</p>
+    </body>
+</html>

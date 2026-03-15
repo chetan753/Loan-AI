@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LoanAI — Stats</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <div class="topbar">
+        <div class="tb-logo">
+            <div class="tb-icon">🏦</div>
+            <span class="tb-name">LoanAI</span>
+            <span class="tb-badge">LIVE</span>
+        </div>
+        <div class="tb-div"></div>
+        <div class="tb-links">
+            <a href="/"        class="tb-link">Home</a>
+            <a href="/predict" class="tb-link">Predict</a>
+            <a href="/history" class="tb-link">History</a>
+            <a href="/stats"   class="tb-link on">Stats</a>
+        </div>
+        <div class="tb-right">
+            <div class="tb-status"><div class="tb-dot"></div>model online</div>
+            <a href="/predict" class="tb-btn">Try Now →</a>
+            <div class="tb-avatar">C</div>
+        </div>
+    </div>
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+        <div class="page-tag">
+            <div class="page-tag-dot"></div>
+            MODEL ANALYTICS
+        </div>
+        <h1>Stats Dashboard</h1>
+        <p>Live insights from your prediction history</p>
+    </div>
+
+    <div class="wrapper">
+
+        <!-- BIG STAT CARDS -->
+        <div class="big-cards">
+            <div class="big-card">
+                <div class="big-card-icon">📊</div>
+                <div class="big-card-val">{{ total }}</div>
+                <div class="big-card-lbl">Total Predictions</div>
+            </div>
+            <div class="big-card">
+                <div class="big-card-icon">✅</div>
+                <div class="big-card-val green">{{ approved }}</div>
+                <div class="big-card-lbl">Approved</div>
+            </div>
+            <div class="big-card">
+                <div class="big-card-icon">❌</div>
+                <div class="big-card-val red">{{ rejected }}</div>
+                <div class="big-card-lbl">Rejected</div>
+            </div>
+            <div class="big-card">
+                <div class="big-card-icon">⚡</div>
+                <div class="big-card-val">{{ approval_rate }}%</div>
+                <div class="big-card-lbl">Approval Rate</div>
+            </div>
+        </div>
+
+        <!-- MIDDLE ROW -->
+        <div class="mid-row">
+
+            <!-- DONUT -->
+            <div class="panel">
+                <div class="panel-title">🎯 Approval Breakdown</div>
+                <div class="donut-wrap">
+                    <div class="donut" style="background: conic-gradient(#10b981 0% {{ approval_rate }}%, #f43f5e {{ approval_rate }}% 100%);">
+                        <div class="donut-hole">{{ approval_rate }}%</div>
+                    </div>
+                    <div class="donut-legend">
+                        <div class="legend-item">
+                            <div class="legend-dot" style="background:#10b981;"></div>
+                            Approved — {{ approved }}
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-dot" style="background:#f43f5e;"></div>
+                            Rejected — {{ rejected }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RISK BARS -->
+            <div class="panel">
+                <div class="panel-title">🔥 Risk Distribution</div>
+                <div class="risk-bars">
+                    <div class="risk-row">
+                        <div class="risk-row-top">
+                            <span class="risk-name">🟢 Low Risk</span>
+                            <span class="risk-val">{{ low_risk }} predictions</span>
+                        </div>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width:{{ low_pct }}%; background:#10b981;"></div>
+                        </div>
+                    </div>
+                    <div class="risk-row">
+                        <div class="risk-row-top">
+                            <span class="risk-name">🟡 Medium Risk</span>
+                            <span class="risk-val">{{ med_risk }} predictions</span>
+                        </div>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width:{{ med_pct }}%; background:#f59e0b;"></div>
+                        </div>
+                    </div>
+                    <div class="risk-row">
+                        <div class="risk-row-top">
+                            <span class="risk-name">🔴 High Risk</span>
+                            <span class="risk-val">{{ high_risk }} predictions</span>
+                        </div>
+                        <div class="bar-track">
+                            <div class="bar-fill" style="width:{{ high_pct }}%; background:#f43f5e;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- AVERAGES ROW -->
+        <div class="avg-row">
+            <div class="avg-card">
+                <div class="avg-lbl">Avg Credit Score</div>
+                <div class="avg-val">{{ avg_credit }}</div>
+                <div class="avg-sub">across all predictions</div>
+            </div>
+            <div class="avg-card">
+                <div class="avg-lbl">Avg Income</div>
+                <div class="avg-val">₹{{ avg_income }}</div>
+                <div class="avg-sub">per applicant</div>
+            </div>
+            <div class="avg-card">
+                <div class="avg-lbl">Avg Loan Amount</div>
+                <div class="avg-val">₹{{ avg_loan }}</div>
+                <div class="avg-sub">per application</div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

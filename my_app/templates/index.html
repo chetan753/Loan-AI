@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<html>
+   <body>
+    <div class="nav-out">
+        <div class="navbtn">
+        <a href="/home1">Guessing Game</a>
+        </div>
+        <div class="navbtn1">
+            <a href="/loan">Loan Apporval</a>
+        </div>
+        <div class="navbtn1">
+            <a href="/calculator">Calculator</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="card">
+        <h1 class="animated-heading" style="color: black; font-family: 'Times New Roman', Times, serif;">Find Square of the number</h1>
+        <form method="POST">
+            <input class="input-box" type="number" name="username" placeholder="0">
+            <button class="btn1" type="submit" name="action" value="square">Submit</button>
+        </form>
+        </div>
+        <p class="result-box">{{ result }}</p>
+        <div class="card1">
+            <h1 class="animated-heading" style="color: black; font-family: 'Times New Roman', Times, serif;">Find Cube of the number</h1>
+            <form method="POST">
+                <input class="input-box" type="number" name="usernum" placeholder="0">
+                <button class="btn1" type="submit" name="action" value="cube">Submit</button>
+            </form>
+        <p class="result-box1">{{ result1 }}</p>
+             
+    </div>
+    </div>
+
+   <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const headings = document.querySelectorAll('.animated-heading');
+
+        headings.forEach((heading) => {
+            const text = heading.textContent.trim();
+            heading.textContent = '';
+
+            Array.from(text).forEach((char, index) => {
+                const span = document.createElement('span');
+                span.textContent = char;
+                span.style.setProperty('--char-index', index);
+                heading.appendChild(span);
+            });
+        });
+    });
+   </script>
+
+   </body> 
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <title>Home Page</title>
+        <link rel="stylesheet" href="{{ url_for('static',filename='style.css')}}">
+        <div class="topbar">
+            <div class="tb-logo">
+                <div class="tb-icon">🏦</div>
+                <span class="tb-name">LoanAI</span>
+                <span class="tb-badge">LIVE</span>
+            </div>
+        
+            <div class="tb-div"></div>
+        
+            <div class="tb-links">
+                <a href="/"        class="tb-link {% if request.path == '/' %}on{% endif %}">Home</a>
+                <a href="/predict" class="tb-link {% if request.path == '/predict' %}on{% endif %}">Predict</a>
+                <a href="/history" class="tb-link {% if request.path == '/history' %}on{% endif %}">History</a>
+                <a href="/stats"   class="tb-link {% if request.path == '/stats' %}on{% endif %}">Stats</a>
+            </div>
+        
+            <div class="tb-right">
+                <div class="tb-status">
+                    <div class="tb-dot"></div>
+                    model online
+                </div>
+                <a href="/predict" class="tb-btn">Try Now →</a>
+                <div class="tb-avatar">C</div>
+            </div>
+        </div>
+        <!DOCTYPE html>
+
+<head>
+    <title>LoanAI — Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    
+
+    <!-- HERO -->
+    <div class="hero">
+        <div class="hero-tag">
+            <div class="hero-tag-dot"></div>
+            ML POWERED DECISIONS
+        </div>
+        <h1>Instant Loan<br>Approval System</h1>
+        <p class="hero-sub">
+            Enter your details. Get an instant decision.<br>
+            Powered by Logistic Regression + SQLite.
+        </p>
+        <div class="hero-btns">
+            <a href="/predict" class="btn-primary">Try it Now →</a>
+            <a href="/history" class="btn-secondary">View History</a>
+        </div>
+    </div>
+
+    <!-- FEATURES -->
+    <div class="section-label">WHAT WE OFFER</div>
+    <div class="section-title">Why LoanAI?</div>
+    <div class="features">
+        <div class="feat-card">
+            <div class="feat-icon">🤖</div>
+            <h3>ML Powered</h3>
+            <p>Logistic Regression model trained on 500+ samples with 85%+ accuracy</p>
+        </div>
+        <div class="feat-card">
+            <div class="feat-icon">⚡</div>
+            <h3>Instant Results</h3>
+            <p>Get your approval decision and probability score in milliseconds</p>
+        </div>
+        <div class="feat-card">
+            <div class="feat-icon">📊</div>
+            <h3>History Tracking</h3>
+            <p>Every prediction saved to SQLite with full history and delete support</p>
+        </div>
+    </div>
+
+    <!-- HOW IT WORKS -->
+    <div class="how">
+        <div class="section-label">THE PROCESS</div>
+        <div class="section-title">How It Works</div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-num">1</div>
+                <h4>Enter Details</h4>
+                <p>Credit score, income, loan amount, employment years, age</p>
+            </div>
+            <div class="step">
+                <div class="step-num">2</div>
+                <h4>ML Analyzes</h4>
+                <p>Model calculates approval probability instantly</p>
+            </div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <h4>Get Decision</h4>
+                <p>Approved or Rejected with risk level assessment</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- STATS BAR -->
+    <div class="stats-bar">
+        <div class="stat">
+            <div class="stat-num">500+</div>
+            <div class="stat-label">TRAINING SAMPLES</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">85%+</div>
+            <div class="stat-label">MODEL ACCURACY</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">3</div>
+            <div class="stat-label">RISK LEVELS</div>
+        </div>
+        <div class="stat">
+            <div class="stat-num">&lt;1ms</div>
+            <div class="stat-label">DECISION SPEED</div>
+        </div>
+    </div>
+
+</body>
+
+    </body>
+</html>
